@@ -7,6 +7,7 @@ import Header from 'alx-react-app/src/components/Header.jsx';
 import MainContent from 'alx-react-app/src/components/MainContent.jsx';
 import Footer from 'alx-react-app/src/components/Footer.jsx';
 import UserProfile from 'alx-react-app/src/components/UserProfile.jsx';
+import Counter from './components/Counter';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,6 +39,8 @@ function App() {
       <Header />
       <MainContent />
       <Footer />
+
+      <Counter />
 
       <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
     </>
