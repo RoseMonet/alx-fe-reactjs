@@ -3,10 +3,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Header from './Header';
-import MainContent from './MainContent';
-import Footer from './Footer';
-import UserProfile from './UserProfile';
+import Header from 'alx-react-app/src/components/Header.jsx';
+import MainContent from 'alx-react-app/src/components/MainContent.jsx';
+import Footer from 'alx-react-app/src/components/Footer.jsx';
+import UserProfile from 'alx-react-app/src/components/UserProfile.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
