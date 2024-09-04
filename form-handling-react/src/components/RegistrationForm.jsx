@@ -1,74 +1,69 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
+  // Initialize state for form fields
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [errors, setErrors] = useState({});
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.username) newErrors.username = 'Username is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      console.log('Submitted Data:', formData);
-      // Simulate API call here
-      alert('User registered successfully!');
-      setFormData({ username: '', email: '', password: '' });
-      setErrors({});
+    // Basic validation checks
+    if (!username || !email || !password) {
+      alert('All fields are required.');
+      return;
     }
+
+    // Simulate an API call or handle registration logic
+    console.log('Form Submitted', { username, email, password });
+    alert('User registered successfully!');
+
+    // Reset form fields
+    setUsername('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Username:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
+          id="username"
           name="username"
-          value={formData.username}
-          onChange={handleChange}
+          value={username} // Controlled input for username
+          onChange={(e) => setUsername(e.target.value)} // Update state on change
+          placeholder="Enter your username"
         />
-        {errors.username && <span>{errors.username}</span>}
       </div>
+
       <div>
-        <label>Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
+          id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email} // Controlled input for email
+          onChange={(e) => setEmail(e.target.value)} // Update state on change
+          placeholder="Enter your email"
         />
-        {errors.email && <span>{errors.email}</span>}
       </div>
+
       <div>
-        <label>Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
+          id="password"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password} // Controlled input for password
+          onChange={(e) => setPassword(e.target.value)} // Update state on change
+          placeholder="Enter your password"
         />
-        {errors.password && <span>{errors.password}</span>}
       </div>
+
       <button type="submit">Register</button>
     </form>
   );
