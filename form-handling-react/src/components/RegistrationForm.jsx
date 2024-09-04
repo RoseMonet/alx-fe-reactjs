@@ -5,18 +5,24 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({}); 
 
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Basic validation checks
-    if (!username || !email || !password) {
-      alert('All fields are required.');
-      return;
-    }
+     const newErrors = {};
+    if (!username) newErrors.username = 'Username is required';
+    if (!email) newErrors.email = 'Email is required'; // Check for empty email
+    if (!password) newErrors.password = 'Password is required'; // Check for empty password
 
+    // Set errors if validation fails
+    setErrors(newErrors);
+
+    // If there are errors, stop form submission
+    if (Object.keys(newErrors).length > 0) return;
     // Simulate an API call or handle registration logic
+   
     console.log('Form Submitted', { username, email, password });
     alert('User registered successfully!');
 
