@@ -1,7 +1,18 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-// Mock authentication check (replace with real logic) const isAuthenticated = () => { // This should be replaced with actual authentication logic return localStorage.getItem('isAuthenticated') === 'true'; };
+import useAuth from '../hooks/useAuth'; // Import the useAuth hook
 
-const ProtectedRoute = ({ component: Component }) => { if (!isAuthenticated()) { return <Navigate to="/" replace />; } return <Component />; };
+const ProtectedRoute = ({ component: Component }) => {
+  const { isAuthenticated } = useAuth(); // Use the authentication status
+
+  // Check if the user is authenticated
+  if (!isAuthenticated) {
+    // Redirect to login or another route if not authenticated
+    return <Navigate to="/login" replace />;
+  }
+
+  // Render the protected component if authenticated
+  return <Component />;
+};
 
 export default ProtectedRoute;
