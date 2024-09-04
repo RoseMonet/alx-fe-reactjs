@@ -30,6 +30,7 @@ const RegistrationForm = () => {
     setUsername('');
     setEmail('');
     setPassword('');
+    setErrors({});
   };
 
   return (
