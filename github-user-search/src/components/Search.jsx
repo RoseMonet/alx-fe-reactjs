@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
+  // Advanced search function
   const fetchUserData = async (username, location, minRepos) => {
     try {
       const query = `q=${username ? username : ''} ${location ? `location:${location}` : ''} ${minRepos ? `repos:>${minRepos}` : ''}`;
       const response = await axios.get(`https://api.github.com/search/users?${query}`);
       return response.data.items;
     } catch (error) {
-      throw new Error('User not found');
+      throw new Error('Error fetching users');
     }
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -67,19 +69,31 @@ const Search = () => {
           </button>
         </div>
       </form>
-      
-      {/* Conditional Rendering based on loading, error, or user data */}
+
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {userData && (
-        <div className="user-info">
-          <img src={userData.avatar_url} alt={userData.login} className="user-avatar" />
-          <h2>{userData.name || userData.login}</h2>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-            Visit GitHub Profile
-          </a>
-        </div>
-      )}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {/* Display search results */}
+      <div className="results mt-6">
+        {userData && userData.map((user) => (
+          <div key={user.id} className="flex items-center p-4 bg-white rounded-lg shadow-md mt-4">
+            <img src={user.avatar_url} alt={user.login} className="w-12 h-12 rounded-full" />
+            <div className="ml-4">
+              <h2 className="text-lg font-semibold">{user.login}</h2>
+              <a
+                href={user.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500"
+              >
+                Visit Profile
+              </a>
+              <p>{user.location ? `Location: ${user.location}` : 'Location: N/A'}</p>
+              <p>{user.public_repos ? `Repos: ${user.public_repos}` : 'Repos: N/A'}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
