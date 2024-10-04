@@ -1,14 +1,14 @@
-import WelcomeMessage from 'alx-react-app/src/components/WelcomeMessage.jsx';
-import { useState } from 'react'
+import WelcomeMessage from './components/WelcomeMessage.jsx';
+import React, { useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Header from 'alx-react-app/src/components/Header.jsx';
-import MainContent from 'alx-react-app/src/components/MainContent.jsx';
-import Footer from 'alx-react-app/src/components/Footer.jsx';
-import UserProfile from 'alx-react-app/src/components/UserProfile.jsx';
-import ProfilePage from './ProfilePage';
-import UserContext from './UserContext';
+import Header from './components/MainContent.jsx';
+import MainContent from './components/MainContent.jsx';
+import Footer from './components/Footer.jsx';
+import UserProfile from './components/UserProfile.jsx';
+import ProfilePage from './components/ProfilePage.jsx';
+import UserContext from './components/UserContext.js';
 
 
 function App() {
