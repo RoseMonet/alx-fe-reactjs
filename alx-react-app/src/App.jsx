@@ -1,6 +1,6 @@
+import { useState } from 'react';
+import reactLogo from "./assets/react.svg";
 import WelcomeMessage from 'alx-react-app/src/components/WelcomeMessage.jsx';
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Header from 'alx-react-app/src/components/Header.jsx';
