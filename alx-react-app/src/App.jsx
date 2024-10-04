@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import reactLogo from "./assets/react.svg";
-import WelcomeMessage from 'alx-react-app/src/components/WelcomeMessage.jsx';
 import viteLogo from '/vite.svg'
 import './App.css'
-import Header from 'alx-react-app/src/components/Header.jsx';
-import MainContent from 'alx-react-app/src/components/MainContent.jsx';
-import Footer from 'alx-react-app/src/components/Footer.jsx';
-import UserProfile from 'alx-react-app/src/components/UserProfile.jsx';
+import Header from './components/Header.jsx';
+import MainContent from './components/MainContent.jsx';
+import Footer from './components/Footer.jsx';
+import UserProfile from './components/UserProfile.jsx';
+import WelcomeMessage from './components/WelcomeMessage.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
