@@ -28,5 +28,9 @@ a{
   cursor: pointer;
   border: 0;
   outline: 0;
+  transition-duration: 0.4s;
 }
-
+.btn:hover {
+  background-color:#464646;
+  color: white;
+}

@@ -1,23 +1,25 @@
 import React, {useState} from 'react'
 import {FaSearch} from "react-icons/fa"
+import { useNavigate } from 'react-router-dom'; 
 import './SearchBar.css'
 
 const SearchBar = ({setResults}) => {
     const [input, setInput] = useState('');
+    const navigate = useNavigate();
 
     const fetchData = (value) => {
         if (value) {
-            fetch(`https://openlibrary.org/search.json?q=${value}`)
+            fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyA1G7efB4iloYXOtxs_Se_8tq3hSxNHQZ0`)
             .then((response) => response.json())
             .then((json) => {
               // Make sure you are correctly accessing the docs array
-              const results = json.docs.map((book) => ({
-                key: book.key,
-                title: book.title,
-                author_name: book.author_name,
-                cover_i: book.cover_i,
-                publisher: book.publisher,
-                first_publish_year: book.first_publish_year,
+              const results = json.items.map((item) => ({
+                id: item.id,
+                        title: item.volumeInfo.title,
+                        author_name: item.volumeInfo.authors,
+                        cover: item.volumeInfo.imageLinks?.thumbnail,
+                        publisher: item.volumeInfo.publisher,
+                        publish_date: item.volumeInfo.publishedDate,
               }));
               setResults(results); // Update the results with fetched data
               navigate('/results'); // Navigate to the search results page
@@ -28,9 +30,14 @@ const SearchBar = ({setResults}) => {
         }
       };
 
-const handleChange = (value) => {
-    setInput(value)
-    fetchData(value);
+      const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+          fetchData(input);  // Trigger the search when "Enter" is pressed
+        }
+      };
+
+    const handleChange = (value) => {
+    setInput(value);
 
 }
 
@@ -38,7 +45,7 @@ const handleChange = (value) => {
         <div className='search-bar-container'>
             <div className= 'input-wrapper'>
                 <FaSearch id= "search-icon"/>
-                <input placeholder= "Search..." value={input} onChange={(e) => handleChange(e.target.value)}
+                <input placeholder= "Search..." value={input} onChange={(e) => handleChange(e.target.value)} onKeyDown={handleKeyPress}
                 />
             </div>        
         </div>
