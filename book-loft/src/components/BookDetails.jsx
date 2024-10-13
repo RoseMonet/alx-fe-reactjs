@@ -8,7 +8,7 @@ const BookDetails = () => {
 
     useEffect(() => {
         // Fetch detailed data for the selected book
-        fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?key=AIzaSyA1G7efB4iloYXOtxs_Se_8tq3hSxNHQZ0`)
+        fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?key`)
             .then((response) => response.json())
             .then((json) => {
                 setBook({
