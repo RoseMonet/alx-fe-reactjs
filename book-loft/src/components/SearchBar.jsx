@@ -9,7 +9,7 @@ const SearchBar = ({setResults}) => {
 
     const fetchData = (value) => {
         if (value) {
-            fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyA1G7efB4iloYXOtxs_Se_8tq3hSxNHQZ0`)
+            fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=`)
             .then((response) => response.json())
             .then((json) => {
               // Make sure you are correctly accessing the docs array
